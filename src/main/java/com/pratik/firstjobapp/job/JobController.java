@@ -1,25 +1,16 @@
 package com.pratik.firstjobapp.job;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class JobController {
-    private JobService jobService;
+    private final JobService jobService;
 
     public JobController(JobService jobService) {
         this.jobService = jobService;
     }
-
-
-
-
-
 
     // Endpoint to get all jobs
     @GetMapping("/jobs")
@@ -32,5 +23,11 @@ public class JobController {
     public String createJob(@RequestBody Job job) {
         jobService.createJob(job);
         return "Job added successfully";
+    }
+
+    // Endpoint to get job by ID
+    @GetMapping("/jobs/{id}")
+    public Job getJobById(@PathVariable Long id) {
+        return jobService.getJobById(id);
     }
 }
