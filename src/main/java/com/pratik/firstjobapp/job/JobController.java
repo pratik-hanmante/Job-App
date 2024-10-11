@@ -25,10 +25,16 @@ public class JobController {
         return "Job added successfully";
     }
 
-    // Endpoint to get job by ID
+    // Endpoint to get job by ID, returning a dummy job if the ID doesn't exist
     @GetMapping("/jobs/{id}")
     public Job getJobById(@PathVariable Long id) {
         Job job = jobService.getJobById(id);
+
+        // If the job is not found, return a dummy job
+        if (job == null) {
+            return new Job(0L, "Dummy Job", "This is a dummy job description", "1000", "5000", "Unknown location");
+        }
+
         return job;
     }
 }
