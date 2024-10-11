@@ -28,6 +28,7 @@ public class JobController {
     // Endpoint to get job by ID
     @GetMapping("/jobs/{id}")
     public Job getJobById(@PathVariable Long id) {
-        return jobService.getJobById(id);
+        Job job = jobService.getJobById(id);
+        return job;
     }
 }
